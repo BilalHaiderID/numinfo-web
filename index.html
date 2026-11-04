@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090d18">
+    <title>NumInfo | Phone Information</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <a class="brand" href="#">
+                <span class="brand-icon">N</span>
+                <span>Num<span class="accent">Info</span></span>
+            </a>
+            <span class="version">WEB TOOL v1.0</span>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="eyebrow">PHONE INFORMATION TOOL</div>
+                <h1>Number <span class="accent">Lookup</span></h1>
+                <p>Search a phone number and inspect the API response.</p>
+            </section>
+
+            <section class="search-card">
+                <label for="numberInput">Mobile number or range</label>
+                <div class="search-row">
+                    <input
+                        id="numberInput"
+                        type="text"
+                        placeholder="03445450870 or 03445450870-75"
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn">Search <span>→</span></button>
+                </div>
+                <div class="hint">
+                    Supports individual numbers and ranges.
+                </div>
+            </section>
+
+            <div id="status" class="status" aria-live="polite">
+                Ready to search.
+            </div>
+
+            <section id="resultsSection" class="results-section" hidden>
+                <div class="section-heading">
+                    <h2>Search Results</h2>
+                    <span id="resultCount" class="count">0 results</span>
+                </div>
+                <div id="results" class="results"></div>
+            </section>
+
+            <section id="rawSection" class="raw-section" hidden>
+                <div class="section-heading">
+                    <h2>Raw API Response</h2>
+                    <button id="copyBtn" class="secondary-btn">Copy JSON</button>
+                </div>
+                <pre id="rawOutput"></pre>
+            </section>
+        </main>
+
+        <footer>
+            <span>NumInfo</span>
+            <span>For authorized testing only</span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
