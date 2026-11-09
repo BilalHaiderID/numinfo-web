@@ -35,9 +35,11 @@ NumInfo/
 
 ## Deployment
 
-The frontend can be hosted on GitHub Pages. The `/api/?number=` endpoint is a
-Vercel serverless function, so deploy the repository to Vercel when the
-frontend needs to use the included API proxy.
+The frontend can be hosted on GitHub Pages, but GitHub Pages cannot execute
+the included `/api/index.js` serverless function. Deploy the repository to
+Vercel (or another serverless host), then set `API_ORIGIN` in `script.js` to
+that deployment's origin when keeping the frontend on GitHub Pages. The
+simplest setup is deploying the complete repository to Vercel.
 
 ## Usage
 
@@ -49,12 +51,12 @@ frontend needs to use the included API proxy.
 ### JSON API
 
 ```text
-GET /api/?number=03408870790
+GET https://YOUR-API-DOMAIN.example/api/?number=03408870790
 ```
 
 The endpoint returns only `number`, `name`, `operator`, and `gender`. It does
 not return upstream address or CNIC fields. `/api?number=...` remains
-compatible as an alternate URL.
+compatible as an alternate URL on the serverless host.
 
 ## Disclaimer
 

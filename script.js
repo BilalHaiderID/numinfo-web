@@ -1,5 +1,8 @@
 
-const API_URL = "/api/?number=";
+// GitHub Pages cannot execute api/index.js. Set this to the deployed
+// serverless API origin when the frontend is hosted on GitHub Pages.
+const API_ORIGIN = "";
+const API_URL = API_ORIGIN + "/api/?number=";
 
 const input = document.getElementById("numberInput");
 const searchBtn = document.getElementById("searchBtn");
@@ -197,6 +200,12 @@ async function searchNumber(number) {
     });
 
     if (!response.ok) {
+        if (response.status === 404) {
+            throw new Error(
+                "The API is not deployed for this website. Deploy the /api function on Vercel and set API_ORIGIN in script.js."
+            );
+        }
+
         throw new Error("API returned HTTP " + response.status);
     }
 
@@ -308,8 +317,7 @@ async function performSearch() {
 
     } catch (error) {
         setStatus(
-            "Request failed: " + error.message +
-            ". The API may block browser requests through CORS.",
+            "Request failed: " + error.message,
             "error"
         );
     } finally {
