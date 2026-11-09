@@ -35,7 +35,7 @@ NumInfo/
 
 ## Deployment
 
-The frontend can be hosted on GitHub Pages. The `/api?number=` endpoint is a
+The frontend can be hosted on GitHub Pages. The `/api/?number=` endpoint is a
 Vercel serverless function, so deploy the repository to Vercel when the
 frontend needs to use the included API proxy.
 
@@ -49,12 +49,12 @@ frontend needs to use the included API proxy.
 ### JSON API
 
 ```text
-GET /api?number=03408870790
+GET /api/?number=03408870790
 ```
 
-The endpoint returns only the number, name, operator, and gender. It does not
-return the upstream `adr` or `cni` values. Gender is calculated privately from
-the final CNIC digit: odd is Male and even is Female.
+The endpoint returns only `number`, `name`, `operator`, and `gender`. It does
+not return upstream address or CNIC fields. `/api?number=...` remains
+compatible as an alternate URL.
 
 ## Disclaimer
 

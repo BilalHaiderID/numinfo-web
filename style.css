@@ -119,6 +119,11 @@ body {
     backdrop-filter: blur(18px);
 }
 
+.search-card:focus-within {
+    border-color: rgba(104, 169, 255, .48);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .28), 0 0 0 4px rgba(104, 169, 255, .08);
+}
+
 .search-card-heading {
     display: flex;
     align-items: flex-start;
@@ -159,25 +164,38 @@ body {
 .search-row input {
     flex: 1;
     min-width: 0;
-    height: 49px;
-    padding: 0 15px;
+    height: 58px;
+    padding: 0 18px;
     color: var(--text);
-    background: rgba(4, 10, 22, .72);
-    border: 1px solid var(--border);
-    border-radius: 9px;
+    background: rgba(4, 10, 22, .9);
+    border: 1px solid rgba(126, 158, 203, .3);
+    border-radius: 12px;
     outline: none;
-    font-size: 14px;
+    font-size: 16px;
+    letter-spacing: .3px;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
 .search-row input:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(104, 169, 255, .12);
+    background: rgba(7, 17, 34, .98);
+    box-shadow: 0 0 0 3px rgba(104, 169, 255, .14), 0 8px 24px rgba(0, 0, 0, .18);
+}
+
+.search-row input::placeholder {
+    color: #647591;
+}
+
+.search-row input::-webkit-outer-spin-button,
+.search-row input::-webkit-inner-spin-button {
+    margin: 0;
 }
 
 .search-row button {
     border: 0;
-    border-radius: 9px;
-    padding: 0 23px;
+    min-width: 124px;
+    border-radius: 12px;
+    padding: 0 25px;
     background: linear-gradient(135deg, #5c9fff, #7d82ff);
     color: white;
     font-weight: 700;
@@ -300,18 +318,6 @@ body {
     border-radius: 6px;
     font-size: 10px;
     white-space: nowrap;
-}
-
-.gender-note {
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px dashed var(--border);
-    color: var(--green);
-    font-size: 10px;
-}
-
-.gender-note span {
-    margin-right: 5px;
 }
 
 .field {

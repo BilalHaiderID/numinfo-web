@@ -1,5 +1,5 @@
 
-const API_URL = "/api?number=";
+const API_URL = "/api/?number=";
 
 const input = document.getElementById("numberInput");
 const searchBtn = document.getElementById("searchBtn");

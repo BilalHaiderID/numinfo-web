@@ -29,8 +29,8 @@
             <section class="search-card">
                 <div class="search-card-heading">
                     <div>
-                        <label for="numberInput">Mobile number or range</label>
-                        <span class="label-support">Pakistan mobile format</span>
+                        <label for="numberInput">Enter a mobile number</label>
+                        <span class="label-support">Pakistan format · 03XX XXXXXXX</span>
                     </div>
                     <span class="search-icon" aria-hidden="true">⌕</span>
                 </div>
@@ -38,12 +38,15 @@
                     <input
                         id="numberInput"
                         type="text"
-                        placeholder="03445450870 or 03445450870-75"
+                        placeholder="0340 8870790 or 0340 8870790-95"
                         autocomplete="off"
+                        inputmode="numeric"
+                        spellcheck="false"
+                        aria-describedby="numberHint"
                     >
                     <button id="searchBtn">Search <span>→</span></button>
                 </div>
-                <div class="hint">
+                <div id="numberHint" class="hint">
                     Supports individual numbers and ranges up to 100 entries.
                 </div>
             </section>
