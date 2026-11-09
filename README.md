@@ -8,7 +8,7 @@ A modern and responsive phone number lookup web application featuring a professi
 - Number range searching
 - Real-time search progress
 - Pakistani mobile operator detection
-- CNIC-based gender field (odd final digit = Male, even final digit = Female)
+- Operator and gender fields in the API response
 - Formatted information cards
 - Raw JSON API response
 - Responsive dark UI
@@ -28,12 +28,16 @@ A modern and responsive phone number lookup web application featuring a professi
 NumInfo/
 ├── index.html
 ├── style.css
-└── script.js
+├── script.js
+└── api/
+    └── index.js
 ```
 
 ## Deployment
 
-Hosted using GitHub Pages.
+The frontend can be hosted on GitHub Pages. The `/api?number=` endpoint is a
+Vercel serverless function, so deploy the repository to Vercel when the
+frontend needs to use the included API proxy.
 
 ## Usage
 
@@ -42,10 +46,15 @@ Hosted using GitHub Pages.
 3. Click Search.
 4. View the returned information and API response.
 
-When a valid 13-digit CNIC is returned, the result card derives gender from
-the final CNIC digit using Pakistan's standard parity convention. This is
-provided for authorized testing and should not be treated as a substitute for
-verified identity information.
+### JSON API
+
+```text
+GET /api?number=03408870790
+```
+
+The endpoint returns only the number, name, operator, and gender. It does not
+return the upstream `adr` or `cni` values. Gender is calculated privately from
+the final CNIC digit: odd is Male and even is Female.
 
 ## Disclaimer
 

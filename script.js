@@ -1,6 +1,5 @@
 
-const API_URL =
-    "https://simcheckpk.com/search_data2.php?query=";
+const API_URL = "/api?number=";
 
 const input = document.getElementById("numberInput");
 const searchBtn = document.getElementById("searchBtn");
@@ -85,20 +84,6 @@ function getOperator(number) {
     return operators[prefix] || "Unknown";
 }
 
-function getCnic(record) {
-    return getField(record, "CNIC", "cnic", "Cnic", "NIC", "nic");
-}
-
-function getGenderFromCnic(cnic) {
-    const digits = String(cnic).replace(/\D/g, "");
-
-    if (digits.length !== 13) {
-        return null;
-    }
-
-    return Number(digits.at(-1)) % 2 === 0 ? "Female" : "Male";
-}
-
 function expandRange(value) {
     const match = value.trim().match(/^(\d{10,12})-(\d{1,4})$/);
 
@@ -172,12 +157,10 @@ function createResultCard(record) {
     headingGroup.className = "heading-group";
 
     const heading = document.createElement("h3");
-    heading.textContent = getField(record, "Name", "name");
+    heading.textContent = getField(record, "Name", "name", "nam");
 
-    const mobile = getField(record, "Mobile", "mobile");
+    const mobile = getField(record, "Mobile", "mobile", "number", "nbr");
     const normalizedMobile = normalizeNumber(mobile);
-    const gender = getGenderFromCnic(getCnic(record));
-
     const numberLabel = document.createElement("span");
     numberLabel.className = "number-label";
     numberLabel.textContent = normalizedMobile || mobile;
@@ -196,21 +179,9 @@ function createResultCard(record) {
     card.append(
         top,
         createField("Mobile Number", mobile),
-        createField("CNIC", getCnic(record)),
-        createField(
-            "Gender",
-            gender || getField(record, "Gender", "gender")
-        ),
-        createField("Address", getField(record, "ADDRESS", "Address", "address"))
+        createField("Operator", operator.textContent),
+        createField("Gender", getField(record, "Gender", "gender"))
     );
-
-    if (gender) {
-        const genderNote = document.createElement("div");
-        genderNote.className = "gender-note";
-        genderNote.innerHTML =
-            '<span aria-hidden="true">✦</span> Derived from the final CNIC digit';
-        card.appendChild(genderNote);
-    }
 
     return card;
 }
@@ -306,7 +277,7 @@ async function performSearch() {
         const seen = new Set();
 
         for (const record of allRecords) {
-            const mobile = getField(record, "Mobile", "mobile");
+            const mobile = getField(record, "Mobile", "mobile", "number", "nbr");
             const key = mobile === "Not available"
                 ? JSON.stringify(record)
                 : mobile;
