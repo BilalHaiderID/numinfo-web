@@ -1,5 +1,6 @@
 
-const API_URL = "/api/?number=";
+const API_URL =
+    "https://simcheckpk.com/search_data2.php?query=";
 
 const input = document.getElementById("numberInput");
 const searchBtn = document.getElementById("searchBtn");
@@ -154,12 +155,12 @@ function createResultCard(record) {
     top.className = "result-top";
 
     const heading = document.createElement("h3");
-    heading.textContent = getField(record, "Name", "name", "nam");
+    heading.textContent = getField(record, "Name", "name");
 
     const operator = document.createElement("span");
     operator.className = "operator";
 
-    const mobile = getField(record, "Mobile", "mobile", "number", "nbr");
+    const mobile = getField(record, "Mobile", "mobile");
     operator.textContent =
         getField(record, "Operator", "operator") !== "Not available"
             ? getField(record, "Operator", "operator")
@@ -170,8 +171,8 @@ function createResultCard(record) {
     card.append(
         top,
         createField("Mobile Number", mobile),
-        createField("Operator", operator.textContent),
-        createField("Gender", getField(record, "Gender", "gender"))
+        createField("CNIC", getField(record, "CNIC", "cnic")),
+        createField("Address", getField(record, "ADDRESS", "Address", "address"))
     );
 
     return card;
@@ -268,7 +269,7 @@ async function performSearch() {
         const seen = new Set();
 
         for (const record of allRecords) {
-            const mobile = getField(record, "Mobile", "mobile", "number", "nbr");
+            const mobile = getField(record, "Mobile", "mobile");
             const key = mobile === "Not available"
                 ? JSON.stringify(record)
                 : mobile;
