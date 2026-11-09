@@ -322,7 +322,7 @@ async function performSearch() {
         );
     } finally {
         searchBtn.disabled = false;
-        searchBtn.innerHTML = '<span>Run lookup</span><b>↗</b>';
+        searchBtn.innerHTML = 'Search <span>→</span>';
     }
 }
 
