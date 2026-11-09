@@ -314,7 +314,7 @@ async function performSearch() {
         );
     } finally {
         searchBtn.disabled = false;
-        searchBtn.innerHTML = 'Search <span>→</span>';
+        searchBtn.innerHTML = '<span>Run lookup</span><b>↗</b>';
     }
 }
 
