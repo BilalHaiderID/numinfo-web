@@ -8,7 +8,7 @@ A modern and responsive phone number lookup web application featuring a professi
 - Number range searching
 - Real-time search progress
 - Pakistani mobile operator detection
-- Operator and gender fields in the API response
+- Gender field when provided by the API
 - Formatted information cards
 - Raw JSON API response
 - Responsive dark UI
@@ -28,18 +28,12 @@ A modern and responsive phone number lookup web application featuring a professi
 NumInfo/
 ├── index.html
 ├── style.css
-├── script.js
-└── api/
-    └── index.js
+└── script.js
 ```
 
 ## Deployment
 
-The frontend can be hosted on GitHub Pages, but GitHub Pages cannot execute
-the included `/api/index.js` serverless function. Deploy the repository to
-Vercel (or another serverless host), then set `API_ORIGIN` in `script.js` to
-that deployment's origin when keeping the frontend on GitHub Pages. The
-simplest setup is deploying the complete repository to Vercel.
+Hosted using GitHub Pages.
 
 ## Usage
 
@@ -47,16 +41,6 @@ simplest setup is deploying the complete repository to Vercel.
 2. Enter a mobile number or supported range.
 3. Click Search.
 4. View the returned information and API response.
-
-### JSON API
-
-```text
-GET https://YOUR-API-DOMAIN.example/api/?number=03408870790
-```
-
-The endpoint returns only `number`, `name`, `operator`, and `gender`. It does
-not return upstream address or CNIC fields. `/api?number=...` remains
-compatible as an alternate URL on the serverless host.
 
 ## Disclaimer
 

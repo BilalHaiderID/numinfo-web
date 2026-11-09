@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#090d18">
-    <meta name="description" content="NumInfo is a responsive Pakistani phone number lookup interface for authorized testing.">
-    <title>NumInfo | Number Intelligence</title>
+    <title>NumInfo | Phone Information</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,38 +15,29 @@
                 <span class="brand-icon">N</span>
                 <span>Num<span class="accent">Info</span></span>
             </a>
-            <span class="version">WEB TOOL <span class="version-dot"></span> v1.1</span>
+            <span class="version">WEB TOOL v1.0</span>
         </header>
 
         <main>
             <section class="hero">
-                <div class="eyebrow"><span class="eyebrow-dot"></span> PHONE INFORMATION TOOL</div>
+                <div class="eyebrow">PHONE INFORMATION TOOL</div>
                 <h1>Number <span class="accent">Lookup</span></h1>
-                <p>Search, understand, and organize Pakistani number information in seconds.</p>
+                <p>Search a phone number and inspect the API response.</p>
             </section>
 
             <section class="search-card">
-                <div class="search-card-heading">
-                    <div>
-                        <label for="numberInput">Enter a mobile number</label>
-                        <span class="label-support">Pakistan format · 03XX XXXXXXX</span>
-                    </div>
-                    <span class="search-icon" aria-hidden="true">⌕</span>
-                </div>
+                <label for="numberInput">Mobile number or range</label>
                 <div class="search-row">
                     <input
                         id="numberInput"
                         type="text"
-                        placeholder="0340 8870790 or 0340 8870790-95"
+                        placeholder="03445450870 or 03445450870-75"
                         autocomplete="off"
-                        inputmode="numeric"
-                        spellcheck="false"
-                        aria-describedby="numberHint"
                     >
                     <button id="searchBtn">Search <span>→</span></button>
                 </div>
-                <div id="numberHint" class="hint">
-                    Supports individual numbers and ranges up to 100 entries.
+                <div class="hint">
+                    Supports individual numbers and ranges.
                 </div>
             </section>
 
@@ -57,10 +47,7 @@
 
             <section id="resultsSection" class="results-section" hidden>
                 <div class="section-heading">
-                    <div>
-                        <span class="section-kicker">RESULTS</span>
-                        <h2>Search Results</h2>
-                    </div>
+                    <h2>Search Results</h2>
                     <span id="resultCount" class="count">0 results</span>
                 </div>
                 <div id="results" class="results"></div>
@@ -68,10 +55,7 @@
 
             <section id="rawSection" class="raw-section" hidden>
                 <div class="section-heading">
-                    <div>
-                        <span class="section-kicker">DEVELOPER VIEW</span>
-                        <h2>API Response</h2>
-                    </div>
+                    <h2>Raw API Response</h2>
                     <button id="copyBtn" class="secondary-btn">Copy JSON</button>
                 </div>
                 <pre id="rawOutput"></pre>

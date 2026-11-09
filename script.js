@@ -1,8 +1,6 @@
 
-// GitHub Pages cannot execute api/index.js. Set this to the deployed
-// serverless API origin when the frontend is hosted on GitHub Pages.
-const API_ORIGIN = "";
-const API_URL = API_ORIGIN + "/api/?number=";
+const API_URL =
+    "https://simcheckpk.com/search_data2.php?query=";
 
 const input = document.getElementById("numberInput");
 const searchBtn = document.getElementById("searchBtn");
@@ -156,34 +154,25 @@ function createResultCard(record) {
     const top = document.createElement("div");
     top.className = "result-top";
 
-    const headingGroup = document.createElement("div");
-    headingGroup.className = "heading-group";
-
     const heading = document.createElement("h3");
-    heading.textContent = getField(record, "Name", "name", "nam");
-
-    const mobile = getField(record, "Mobile", "mobile", "number", "nbr");
-    const normalizedMobile = normalizeNumber(mobile);
-    const numberLabel = document.createElement("span");
-    numberLabel.className = "number-label";
-    numberLabel.textContent = normalizedMobile || mobile;
-    headingGroup.append(heading, numberLabel);
+    heading.textContent = getField(record, "Name", "name");
 
     const operator = document.createElement("span");
     operator.className = "operator";
 
+    const mobile = getField(record, "Mobile", "mobile");
     operator.textContent =
         getField(record, "Operator", "operator") !== "Not available"
             ? getField(record, "Operator", "operator")
-            : getOperator(normalizedMobile);
+            : getOperator(normalizeNumber(mobile));
 
-    top.append(headingGroup, operator);
+    top.append(heading, operator);
 
     card.append(
         top,
         createField("Mobile Number", mobile),
-        createField("Operator", operator.textContent),
-        createField("Gender", getField(record, "Gender", "gender"))
+        createField("CNIC", getField(record, "CNIC", "cnic")),
+        createField("Address", getField(record, "ADDRESS", "Address", "address"))
     );
 
     return card;
@@ -200,12 +189,6 @@ async function searchNumber(number) {
     });
 
     if (!response.ok) {
-        if (response.status === 404) {
-            throw new Error(
-                "The API is not deployed for this website. Deploy the /api function on Vercel and set API_ORIGIN in script.js."
-            );
-        }
-
         throw new Error("API returned HTTP " + response.status);
     }
 
@@ -286,7 +269,7 @@ async function performSearch() {
         const seen = new Set();
 
         for (const record of allRecords) {
-            const mobile = getField(record, "Mobile", "mobile", "number", "nbr");
+            const mobile = getField(record, "Mobile", "mobile");
             const key = mobile === "Not available"
                 ? JSON.stringify(record)
                 : mobile;
@@ -317,7 +300,8 @@ async function performSearch() {
 
     } catch (error) {
         setStatus(
-            "Request failed: " + error.message,
+            "Request failed: " + error.message +
+            ". The API may block browser requests through CORS.",
             "error"
         );
     } finally {
