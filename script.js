@@ -85,6 +85,20 @@ function getOperator(number) {
     return operators[prefix] || "Unknown";
 }
 
+function getCnic(record) {
+    return getField(record, "CNIC", "cnic", "Cnic", "NIC", "nic");
+}
+
+function getGenderFromCnic(cnic) {
+    const digits = String(cnic).replace(/\D/g, "");
+
+    if (digits.length !== 13) {
+        return null;
+    }
+
+    return Number(digits.at(-1)) % 2 === 0 ? "Female" : "Male";
+}
+
 function expandRange(value) {
     const match = value.trim().match(/^(\d{10,12})-(\d{1,4})$/);
 
@@ -154,26 +168,49 @@ function createResultCard(record) {
     const top = document.createElement("div");
     top.className = "result-top";
 
+    const headingGroup = document.createElement("div");
+    headingGroup.className = "heading-group";
+
     const heading = document.createElement("h3");
     heading.textContent = getField(record, "Name", "name");
+
+    const mobile = getField(record, "Mobile", "mobile");
+    const normalizedMobile = normalizeNumber(mobile);
+    const gender = getGenderFromCnic(getCnic(record));
+
+    const numberLabel = document.createElement("span");
+    numberLabel.className = "number-label";
+    numberLabel.textContent = normalizedMobile || mobile;
+    headingGroup.append(heading, numberLabel);
 
     const operator = document.createElement("span");
     operator.className = "operator";
 
-    const mobile = getField(record, "Mobile", "mobile");
     operator.textContent =
         getField(record, "Operator", "operator") !== "Not available"
             ? getField(record, "Operator", "operator")
-            : getOperator(normalizeNumber(mobile));
+            : getOperator(normalizedMobile);
 
-    top.append(heading, operator);
+    top.append(headingGroup, operator);
 
     card.append(
         top,
         createField("Mobile Number", mobile),
-        createField("CNIC", getField(record, "CNIC", "cnic")),
+        createField("CNIC", getCnic(record)),
+        createField(
+            "Gender",
+            gender || getField(record, "Gender", "gender")
+        ),
         createField("Address", getField(record, "ADDRESS", "Address", "address"))
     );
+
+    if (gender) {
+        const genderNote = document.createElement("div");
+        genderNote.className = "gender-note";
+        genderNote.innerHTML =
+            '<span aria-hidden="true">✦</span> Derived from the final CNIC digit';
+        card.appendChild(genderNote);
+    }
 
     return card;
 }

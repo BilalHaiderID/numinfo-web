@@ -8,7 +8,7 @@ A modern and responsive phone number lookup web application featuring a professi
 - Number range searching
 - Real-time search progress
 - Pakistani mobile operator detection
-- Gender field when provided by the API
+- CNIC-based gender field (odd final digit = Male, even final digit = Female)
 - Formatted information cards
 - Raw JSON API response
 - Responsive dark UI
@@ -41,6 +41,11 @@ Hosted using GitHub Pages.
 2. Enter a mobile number or supported range.
 3. Click Search.
 4. View the returned information and API response.
+
+When a valid 13-digit CNIC is returned, the result card derives gender from
+the final CNIC digit using Pakistan's standard parity convention. This is
+provided for authorized testing and should not be treated as a substitute for
+verified identity information.
 
 ## Disclaimer
 
